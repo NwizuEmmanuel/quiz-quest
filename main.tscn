@@ -6,6 +6,8 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0xm2m"]
 texture = ExtResource("1_ig7tw")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
+
 [node name="Main" type="Control" unique_id=122524751]
 layout_mode = 3
 anchors_preset = 15
@@ -36,5 +38,6 @@ offset_right = 130.0
 offset_bottom = 26.625
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0xm2m")
 text = "START GAME"
 icon = ExtResource("2_0xm2m")
