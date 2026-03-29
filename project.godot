@@ -11,8 +11,22 @@ config_version=5
 [application]
 
 config/name="quiz-quest"
-run/main_scene="uid://cyankhdy4jdev"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+run/main_scene="uid://5lnq1moklflw"
+config/features=PackedStringArray("4.6", "Forward Plus")
+boot_splash/image="uid://bud0db804qtga"
+
+[audio]
+
+buses/default_bus_layout=""
+
+[autoload]
+
+QuizData="*uid://c3cfiuef2xc2q"
+
+[gui]
+
+theme/custom="uid://dc6o4gyd3plt7"
+theme/custom_font="uid://dg6tin7cec0ty"
 
 [physics]
 
@@ -21,5 +35,3 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 [rendering]
 
 rendering_device/driver.windows="d3d12"
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"

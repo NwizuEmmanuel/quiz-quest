@@ -1,0 +1,207 @@
+[gd_scene format=3 uid="uid://dlvqvhbykcels"]
+
+[ext_resource type="Script" uid="uid://cuvsy0wk7aqtv" path="res://scenes/play_quiz/play_quiz.gd" id="1_yubl4"]
+[ext_resource type="Texture2D" uid="uid://djoh0csjxhwu3" path="res://assets/images/jlwd_2ucy_201006.jpg" id="2_y360a"]
+
+[node name="PlayQuiz" type="Control" unique_id=1457344942]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yubl4")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1160010746]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_y360a")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=843637179]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1953732103]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -262.96875
+offset_top = -60.75
+offset_right = 262.96875
+offset_bottom = 60.75
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QuestionText" type="Label" parent="VBoxContainer" unique_id=1607877222]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Nothing here yet..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=689113648]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="OptionsTextBox" type="VBoxContainer" parent="VBoxContainer" unique_id=742567798]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="OptionsText1" type="Label" parent="VBoxContainer/OptionsTextBox" unique_id=476651139]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="OptionsText2" type="Label" parent="VBoxContainer/OptionsTextBox" unique_id=1961335140]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="OptionsText3" type="Label" parent="VBoxContainer/OptionsTextBox" unique_id=1899418779]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="OptionsText4" type="Label" parent="VBoxContainer/OptionsTextBox" unique_id=34937381]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="IdentificationAnswerBox" type="VBoxContainer" parent="VBoxContainer" unique_id=2045479396]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/IdentificationAnswerBox" unique_id=514426819]
+layout_mode = 2
+text = "Answers are case insensitive"
+
+[node name="IdentificationAnswerLineEdit" type="LineEdit" parent="VBoxContainer/IdentificationAnswerBox" unique_id=197173318]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Answer here..."
+clear_button_enabled = true
+
+[node name="MultipleChoiceOptionsBox" type="GridContainer" parent="VBoxContainer" unique_id=929824962]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="OptionA" type="Button" parent="VBoxContainer/MultipleChoiceOptionsBox" unique_id=367391072]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "A"
+
+[node name="OptionB" type="Button" parent="VBoxContainer/MultipleChoiceOptionsBox" unique_id=406589302]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "B"
+
+[node name="OptionC" type="Button" parent="VBoxContainer/MultipleChoiceOptionsBox" unique_id=280366317]
+layout_mode = 2
+text = "C"
+
+[node name="OptionD" type="Button" parent="VBoxContainer/MultipleChoiceOptionsBox" unique_id=2073101695]
+layout_mode = 2
+text = "D"
+
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=57232889]
+layout_mode = 0
+offset_right = 308.0
+offset_bottom = 56.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+
+[node name="PlayerLifeBox" type="VBoxContainer" parent="MarginContainer2" unique_id=13699091]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer2/PlayerLifeBox" unique_id=958446619]
+layout_mode = 2
+text = "Player"
+horizontal_alignment = 2
+
+[node name="PlayerLifeBar" type="ProgressBar" parent="MarginContainer2/PlayerLifeBox" unique_id=1074713926]
+unique_name_in_owner = true
+layout_mode = 2
+value = 100.0
+
+[node name="PlayerMssg" type="Label" parent="MarginContainer2/PlayerLifeBox" unique_id=1919162362]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=987594246]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -308.0
+offset_bottom = 56.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+
+[node name="BossLifeBox" type="VBoxContainer" parent="MarginContainer" unique_id=1233073311]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/BossLifeBox" unique_id=599365486]
+layout_mode = 2
+text = "Boss"
+
+[node name="BossLifeBar" type="ProgressBar" parent="MarginContainer/BossLifeBox" unique_id=1590230205]
+unique_name_in_owner = true
+layout_mode = 2
+value = 100.0
+
+[node name="MarginContainer3" type="MarginContainer" parent="." unique_id=1709772609]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -174.0
+offset_right = 174.0
+offset_bottom = 104.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer3" unique_id=736182195]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer3/VBoxContainer" unique_id=1269127858]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Score: 0/0"
+horizontal_alignment = 1
+
+[node name="TimerLabel" type="Label" parent="MarginContainer3/VBoxContainer" unique_id=461672402]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Time: 0"
+horizontal_alignment = 1
+
+[node name="QuizTimer" type="Timer" parent="." unique_id=1013348502]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="text_submitted" from="VBoxContainer/IdentificationAnswerBox/IdentificationAnswerLineEdit" to="." method="_on_identification_answer_line_edit_text_submitted"]
+[connection signal="pressed" from="VBoxContainer/MultipleChoiceOptionsBox/OptionA" to="." method="_on_option_a_pressed"]
+[connection signal="pressed" from="VBoxContainer/MultipleChoiceOptionsBox/OptionB" to="." method="_on_option_b_pressed"]
+[connection signal="pressed" from="VBoxContainer/MultipleChoiceOptionsBox/OptionC" to="." method="_on_option_c_pressed"]
+[connection signal="pressed" from="VBoxContainer/MultipleChoiceOptionsBox/OptionD" to="." method="_on_option_d_pressed"]

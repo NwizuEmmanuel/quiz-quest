@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://5lnq1moklflw"]
+
+[ext_resource type="Script" uid="uid://b46oj7owjjnx" path="res://scenes/main/main.gd" id="1_iuonh"]
+[ext_resource type="Texture2D" uid="uid://c3gnctu2ea20i" path="res://assets/images/chenspec-art-7018244.jpg" id="2_k2fmo"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w6xti"]
+texture = ExtResource("2_k2fmo")
+
+[node name="Main" type="Control" unique_id=1484905596]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iuonh")
+
+[node name="Panel" type="Panel" parent="." unique_id=408102322]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_w6xti")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1654181783]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -171.0
+offset_top = -108.4375
+offset_right = 171.0
+offset_bottom = 123.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartGameButton" type="Button" parent="VBoxContainer" unique_id=1420269669]
+layout_mode = 2
+size_flags_vertical = 3
+text = "START GAME"
+
+[node name="ViewResultsButton" type="Button" parent="VBoxContainer" unique_id=1622795821]
+layout_mode = 2
+size_flags_vertical = 3
+text = "View Results"
+
+[node name="ExitGameButton" type="Button" parent="VBoxContainer" unique_id=1382486239]
+layout_mode = 2
+size_flags_vertical = 3
+text = "EXIT GAME"
+
+[connection signal="pressed" from="VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ViewResultsButton" to="." method="_on_view_results_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitGameButton" to="." method="_on_exit_game_button_pressed"]
