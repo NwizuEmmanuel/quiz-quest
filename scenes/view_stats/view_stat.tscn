@@ -109,6 +109,7 @@ title = "Open a Directory"
 file_mode = 2
 display_mode = 1
 access = 2
+use_native_dialog = true
 
 [node name="AcceptDialog" type="AcceptDialog" parent="." unique_id=549592233]
 

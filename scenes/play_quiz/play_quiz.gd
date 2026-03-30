@@ -37,6 +37,7 @@ func save_data():
 	var quiz_title = QuizData.quiz_title
 	var player_stats = load("user://data/player_stats.res") as PlayerStats
 	player_stats.score = score
+	player_stats.total_questions = total_questions
 	player_stats.quiz_frequency += 1
 	if defeated_boss:
 		player_stats.defeated_boss_count += 1

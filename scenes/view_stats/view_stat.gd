@@ -17,6 +17,8 @@ func _ready():
 	load_file_list()
 
 func load_file_list():
+	var player_stats = load("user://data/player_stats.res") as PlayerStats
+	change_all_usernames(player_stats.username)
 	item_list.clear()
 	
 	var dir = DirAccess.open(folder_path)
@@ -56,9 +58,12 @@ func display_file_data(path: String):
 		# Build the BBCode display
 		var bbcode = "[b]Quiz Info:[/b] %s\n" % data.quiz_title
 		bbcode += "-------------------\n"
+		bbcode += "Player Id: %s\n" % data.id
+		bbcode += "Date: %s\n" % data.date_added
 		bbcode += "Player Name: %s\n" % data.username
 		bbcode += "Quiz Title: %s\n" % data.quiz_title
 		bbcode += "Score: [color=yellow]%d[/color]\n" % data.score
+		bbcode += "Total questions: %s\n" % data.total_questions
 		
 		if data.defeated_boss_count > 0:
 			bbcode += "Status: [color=green]Boss Defeated[/color]"
@@ -93,6 +98,11 @@ func _on_export_dialog_dir_selected(target_path: String):
 	
 	# 2. Get the original file name (e.g., "Math_Quiz.res")
 	var file_name = source_path.get_file()
+	var username = load(source_path).username
+	if username == "nil":
+		accept_dialog.dialog_text = "Enter your name"
+		accept_dialog.popup_centered()
+		return 
 	
 	# 3. Create the final destination path inside the new directory
 	var final_destination = target_path.path_join(file_name)
@@ -146,6 +156,9 @@ func update_single_file(path: String, new_name: String):
 
 func _on_save_button_pressed() -> void:
 	var new_name = %YourNameInput.text
+	var player_stats = load("user://data/player_stats.res") as PlayerStats
+	player_stats.username = new_name
+	ResourceSaver.save(player_stats,"user://data/player_stats.res")
 	change_all_usernames(new_name)
 	accept_dialog.dialog_text = "All result have been updated."
 	accept_dialog.popup_centered()
