@@ -60,7 +60,7 @@ func display_file_data(path: String):
 		bbcode += "Quiz Title: %s\n" % data.quiz_title
 		bbcode += "Score: [color=yellow]%d[/color]\n" % data.score
 		
-		if data.defeated_boss:
+		if data.defeated_boss_count > 0:
 			bbcode += "Status: [color=green]Boss Defeated[/color]"
 		else:
 			bbcode += "Status: [color=red]Boss Active[/color]"
@@ -149,3 +149,4 @@ func _on_save_button_pressed() -> void:
 	change_all_usernames(new_name)
 	accept_dialog.dialog_text = "All result have been updated."
 	accept_dialog.popup_centered()
+	load_file_list()
