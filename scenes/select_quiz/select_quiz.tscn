@@ -101,6 +101,7 @@ file_mode = 0
 display_mode = 1
 access = 2
 filters = PackedStringArray("*.res")
+use_native_dialog = true
 
 [node name="AcceptDialog" type="AcceptDialog" parent="." unique_id=1040306509]
 unique_name_in_owner = true
