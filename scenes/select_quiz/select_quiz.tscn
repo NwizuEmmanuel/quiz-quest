@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://by4pofomoswoy"]
 
 [ext_resource type="Script" uid="uid://bxbw0kdcc4o5q" path="res://scenes/select_quiz/select_quiz.gd" id="1_7ak03"]
-[ext_resource type="Texture2D" uid="uid://c3gnctu2ea20i" path="res://assets/images/chenspec-art-7018244.jpg" id="2_obeme"]
+[ext_resource type="Texture2D" uid="uid://d0qni50d7l8b2" path="res://assets/backgrounds/library.png" id="2_7ak03"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_45nl3"]
-texture = ExtResource("2_obeme")
+texture = ExtResource("2_7ak03")
 
 [node name="SelectQuiz" type="Control" unique_id=95589843]
 layout_mode = 3
