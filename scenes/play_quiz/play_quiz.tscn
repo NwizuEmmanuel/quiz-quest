@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://dlvqvhbykcels"]
 
+[ext_resource type="Theme" uid="uid://dc6o4gyd3plt7" path="res://commons/ui_theme.theme" id="1_y360a"]
 [ext_resource type="Script" uid="uid://cuvsy0wk7aqtv" path="res://scenes/play_quiz/play_quiz.gd" id="1_yubl4"]
 [ext_resource type="Texture2D" uid="uid://djoh0csjxhwu3" path="res://assets/images/jlwd_2ucy_201006.jpg" id="2_y360a"]
+[ext_resource type="Texture2D" uid="uid://8vjg6lstj4co" path="res://assets/images/boss.png" id="4_xpl5k"]
+[ext_resource type="Texture2D" uid="uid://yn8d5wc12uft" path="res://assets/images/player.png" id="5_3vmhi"]
 
 [node name="PlayQuiz" type="Control" unique_id=1457344942]
 layout_mode = 3
@@ -10,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_y360a")
 script = ExtResource("1_yubl4")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1160010746]
@@ -200,8 +204,54 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 one_shot = true
 
+[node name="Button" type="Button" parent="." unique_id=967828234]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = -59.0
+offset_right = 90.0
+offset_bottom = -12.0
+grow_vertical = 0
+text = "Quit Quiz"
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=398774353]
+ok_button_text = "Yes"
+cancel_button_text = "No"
+
+[node name="BossSprite2D" type="TextureRect" parent="." unique_id=918047270]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.99100006
+anchor_top = 0.22200002
+anchor_right = 0.99100006
+anchor_bottom = 0.22200002
+offset_left = -229.63208
+offset_top = 19.143982
+offset_right = 1676.7854
+offset_bottom = 1354.479
+scale = Vector2(0.11034929, 0.13704425)
+texture = ExtResource("4_xpl5k")
+
+[node name="PlayerSprite2D" type="TextureRect" parent="." unique_id=1319794616]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.208
+anchor_bottom = 0.208
+offset_left = 16.0
+offset_top = 25.216019
+offset_right = 2116.7446
+offset_bottom = 1388.2197
+scale = Vector2(0.11757735, 0.14306638)
+texture = ExtResource("5_3vmhi")
+
 [connection signal="text_submitted" from="VBoxContainer/IdentificationAnswerBox/IdentificationAnswerLineEdit" to="." method="_on_identification_answer_line_edit_text_submitted"]
 [connection signal="pressed" from="VBoxContainer/MultipleChoiceOptionsBox/OptionA" to="." method="_on_option_a_pressed"]
 [connection signal="pressed" from="VBoxContainer/MultipleChoiceOptionsBox/OptionB" to="." method="_on_option_b_pressed"]
 [connection signal="pressed" from="VBoxContainer/MultipleChoiceOptionsBox/OptionC" to="." method="_on_option_c_pressed"]
 [connection signal="pressed" from="VBoxContainer/MultipleChoiceOptionsBox/OptionD" to="." method="_on_option_d_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]

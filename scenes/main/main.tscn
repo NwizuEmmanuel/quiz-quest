@@ -53,6 +53,18 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "EXIT GAME"
 
+[node name="Label" type="Label" parent="." unique_id=1563651937]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -158.5
+offset_right = 158.5
+offset_bottom = 153.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 82
+text = "QUIZ QUEST"
+
 [connection signal="pressed" from="VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ViewResultsButton" to="." method="_on_view_results_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitGameButton" to="." method="_on_exit_game_button_pressed"]

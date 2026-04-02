@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://bx3j7tuaj5jyb"]
 
 [ext_resource type="Script" uid="uid://dmhuwo3ewg5ok" path="res://scenes/view_stats/view_stat.gd" id="1_77s2t"]
+[ext_resource type="Theme" uid="uid://dc6o4gyd3plt7" path="res://commons/ui_theme.theme" id="1_xxs4l"]
 [ext_resource type="Texture2D" uid="uid://7fokg62drnrk" path="res://assets/backgrounds/name bg.png" id="2_77s2t"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_77s2t"]
 texture = ExtResource("2_77s2t")
+modulate_color = Color(0.42595553, 0.42595553, 0.4259555, 1)
 
 [node name="ViewStat" type="Control" unique_id=1879957109]
 layout_mode = 3
@@ -13,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_xxs4l")
 script = ExtResource("1_77s2t")
 
 [node name="Panel" type="Panel" parent="." unique_id=1790694372]

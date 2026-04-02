@@ -12,6 +12,8 @@ var defeated_boss = false
 var identification_answer = ""
 var multiple_choice_answer = 0
 
+const SPEED = 400.0
+
 
 func _ready() -> void:
 	if load(QuizData.quiz_path) != null:
@@ -21,10 +23,12 @@ func _ready() -> void:
 	run_quiz()
 
 
-func _process(_delta: float) -> void:
+func _process(_delta: float) -> void: 
 	%TimerLabel.text = "TIME: %d" % int(%QuizTimer.time_left)
 	%ScoreLabel.text = "SCORE: %d/%d" % [score, total_questions]
-	if %QuizTimer.time_left == 0.0:
+	if %QuizTimer.time_left == 0:
+		deal_player_damage()
+		show_player_mssg("TOO LATE")
 		current_quiz_index += 1
 		run_quiz()
 
@@ -47,8 +51,8 @@ func save_data():
 func deal_damage() -> float:
 	if total_questions <= 0:
 		return 0
-	if %QuizTimer.is_stopped():
-		return 0
+	#if %QuizTimer.is_stopped():
+		#return 0
 	var time_left = %QuizTimer.time_left
 	var damage_point = 100.0 / max(1, total_questions - GRACE_POINT)
 	return damage_point + time_left
@@ -56,11 +60,13 @@ func deal_damage() -> float:
 func deal_boss_damage():
 	boss_life = max(0, boss_life - deal_damage())
 	%BossLifeBar.value = boss_life
+	attack_boss()
 
 
 func deal_player_damage():
 	player_life = max(0, player_life - deal_damage())
 	%PlayerLifeBar.value = player_life
+	attack_player()
 
 func run_quiz():
 	if  current_quiz_index >= total_questions:
@@ -146,3 +152,48 @@ func _on_identification_answer_line_edit_text_submitted(new_text: String) -> voi
 	check_identification_answer(new_text.strip_edges())
 	run_quiz()
 	%IdentificationAnswerLineEdit.clear()
+
+@onready var confirm_dialog = $ConfirmationDialog
+func _on_button_pressed() -> void:
+	confirm_dialog.dialog_text = "Do you want to stop this quiz?"
+	confirm_dialog.popup_centered()
+
+
+func _on_confirmation_dialog_confirmed() -> void:
+	get_tree().change_scene_to_file("res://scenes/select_quiz/select_quiz.tscn")
+
+# Move distances
+var ATTACK_DISTANCE = 900
+const MOVE_TIME = 0.4 # How fast they slide forward/back
+const WAIT_TIME = 0.5 # How long they stay at the impact point
+
+## Player attacks from Left to Right
+func attack_boss():
+	var tween = create_tween()
+	var start_pos = %PlayerSprite2D.position
+	var target_pos = start_pos + Vector2(ATTACK_DISTANCE, 0)
+
+	# 1. Slide Right (Forward)
+	tween.tween_property(%PlayerSprite2D, "position", target_pos, MOVE_TIME).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+	# 2. Pause for the "hit"
+	tween.tween_interval(WAIT_TIME)
+
+	# 3. Slide Left (Back)
+	tween.tween_property(%PlayerSprite2D, "position", start_pos, MOVE_TIME).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+
+	## Boss attacks from Right to Left
+func attack_player():
+	var tween = create_tween()
+	var start_pos = %BossSprite2D.position
+	# Note the MINUS sign to move left
+	var target_pos = start_pos + Vector2(-ATTACK_DISTANCE, 0) 
+
+	# 1. Slide Left (Forward)
+	tween.tween_property(%BossSprite2D, "position", target_pos, MOVE_TIME).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+	# 2. Pause
+	tween.tween_interval(WAIT_TIME)
+
+	# 3. Slide Right (Back)
+	tween.tween_property(%BossSprite2D, "position", start_pos, MOVE_TIME).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
