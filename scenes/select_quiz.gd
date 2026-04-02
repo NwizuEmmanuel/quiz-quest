@@ -58,7 +58,7 @@ func _on_file_dialog_file_selected(path: String) -> void:
 
 
 func _on_go_to_hub_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/main/main.tscn")
+	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 
 func _on_play_button_pressed() -> void:
@@ -74,9 +74,9 @@ func _on_play_button_pressed() -> void:
 			player_stats = PlayerStats.new()
 			ResourceSaver.save(player_stats, "user://data/player_stats.res")
 		if player_stats.username == "":
-			get_tree().change_scene_to_file("res://scenes/create_username/create_username.tscn")
+			get_tree().change_scene_to_file("res://scenes/create_username.tscn")
 		else:
-			get_tree().change_scene_to_file("res://scenes/play_quiz/play_quiz.tscn")
+			get_tree().change_scene_to_file("res://scenes/play_quiz.tscn")
 	else:
 		show_accept_dialog("WARNING", "SELECT A QUIZ TO PLAY")
 
@@ -97,4 +97,4 @@ func _on_delete_button_pressed() -> void:
 
 
 func _on_view_results_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/view_stats/view_stat.tscn")
+	get_tree().change_scene_to_file("res://scenes/view_stat.tscn")

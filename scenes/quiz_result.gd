@@ -20,14 +20,14 @@ func show_result():
 	%ResultRichTextLabel.text = result_text
 
 func _on_go_home_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/main/main.tscn")
+	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 
 func restart_quiz() -> void:
 	QuizData.score = 0
 	QuizData.defeated_boss = false
 	QuizData.failed_questions.clear()
-	get_tree().change_scene_to_file("res://scenes/play_quiz/play_quiz.tscn")
+	get_tree().change_scene_to_file("res://scenes/play_quiz.tscn")
 
 
 func _on_confirmation_dialog_confirmed() -> void:

@@ -51,8 +51,6 @@ func save_data():
 func deal_damage() -> float:
 	if total_questions <= 0:
 		return 0
-	#if %QuizTimer.is_stopped():
-		#return 0
 	var time_left = %QuizTimer.time_left
 	var damage_point = 100.0 / max(1, total_questions - GRACE_POINT)
 	return damage_point + time_left
@@ -75,7 +73,7 @@ func run_quiz():
 			defeated_boss = true
 		save_data()
 		print(QuizData.defeated_boss)
-		get_tree().change_scene_to_file("res://scenes/quiz_result/quiz_result.tscn")
+		get_tree().change_scene_to_file("res://scenes/quiz_result.tscn")
 		return
 	
 	var quiz = quiz_items[current_quiz_index]
@@ -83,18 +81,16 @@ func run_quiz():
 	
 	%QuestionText.text = str(current_quiz_index+1)+": "+quiz.text
 	if quiz.question_type == QuestionItem.QuestionType.IDENTIFICATION:
-		%OptionsTextBox.hide()
 		%IdentificationAnswerBox.show()
 		%IdentificationAnswerLineEdit.grab_focus()
 		%MultipleChoiceOptionsBox.hide()
 	elif quiz.question_type == QuestionItem.QuestionType.MULTIPLE_CHOICE:
 		%IdentificationAnswerBox.hide()
-		%OptionsTextBox.show()
 		%MultipleChoiceOptionsBox.show()
-		%OptionsText1.text = "A: "+quiz.options[0]
-		%OptionsText2.text = "B: "+quiz.options[1]
-		%OptionsText3.text = "C: "+quiz.options[2]
-		%OptionsText4.text = "D: "+quiz.options[3]
+		%OptionA.text = "A: "+quiz.options[0]
+		%OptionB.text = "B: "+quiz.options[1]
+		%OptionC.text = "C: "+quiz.options[2]
+		%OptionD.text = "D: "+quiz.options[3]
 
 
 func show_player_mssg(mssg: String):
@@ -160,7 +156,7 @@ func _on_button_pressed() -> void:
 
 
 func _on_confirmation_dialog_confirmed() -> void:
-	get_tree().change_scene_to_file("res://scenes/select_quiz/select_quiz.tscn")
+	get_tree().change_scene_to_file("res://scenes/select_quiz.tscn")
 
 # Move distances
 var ATTACK_DISTANCE = 900

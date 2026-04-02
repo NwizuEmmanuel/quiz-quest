@@ -76,7 +76,7 @@ func display_file_data(path: String):
 
 
 func _on_go_back_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/select_quiz/select_quiz.tscn")
+	get_tree().change_scene_to_file("res://scenes/select_quiz.tscn")
 
 
 func _on_export_button_pressed():
