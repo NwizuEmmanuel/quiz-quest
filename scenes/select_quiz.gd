@@ -65,8 +65,8 @@ func _on_play_button_pressed() -> void:
 	if %QuizItemList.is_anything_selected():
 		var selected_items = %QuizItemList.get_selected_items()
 		var index = selected_items[0]
-		QuizData.quiz_title = %QuizItemList.get_item_text(index)
-		QuizData.quiz_path = %QuizItemList.get_item_metadata(index)
+		Global.quiz_title = %QuizItemList.get_item_text(index)
+		Global.quiz_path = %QuizItemList.get_item_metadata(index)
 		
 		var player_stats = load("user://data/player_stats.res") as PlayerStats
 		DirAccess.make_dir_recursive_absolute("user://data/")

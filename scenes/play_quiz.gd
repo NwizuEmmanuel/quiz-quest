@@ -16,8 +16,8 @@ const SPEED = 400.0
 
 
 func _ready() -> void:
-	if load(QuizData.quiz_path) != null:
-		questions = load(QuizData.quiz_path) as Questions
+	if load(Global.quiz_path) != null:
+		questions = load(Global.quiz_path) as Questions
 		quiz_items = questions.questions
 	total_questions = quiz_items.size()
 	run_quiz()
@@ -34,11 +34,11 @@ func _process(_delta: float) -> void:
 
 
 func save_data():
-	QuizData.score = score
-	QuizData.total_questions = total_questions
-	QuizData.defeated_boss = defeated_boss
+	Global.score = score
+	Global.total_questions = total_questions
+	Global.defeated_boss = defeated_boss
 	DirAccess.make_dir_recursive_absolute("user://quiz_results")
-	var quiz_title = QuizData.quiz_title
+	var quiz_title = Global.quiz_title
 	var player_stats = load("user://data/player_stats.res") as PlayerStats
 	player_stats.score = score
 	player_stats.total_questions = total_questions
@@ -72,7 +72,7 @@ func run_quiz():
 		if boss_life == 0:
 			defeated_boss = true
 		save_data()
-		print(QuizData.defeated_boss)
+		print(Global.defeated_boss)
 		get_tree().change_scene_to_file("res://scenes/quiz_result.tscn")
 		return
 	
