@@ -2,9 +2,15 @@
 
 [ext_resource type="Script" uid="uid://bxbw0kdcc4o5q" path="res://scenes/select_quiz/select_quiz.gd" id="1_7ak03"]
 [ext_resource type="Texture2D" uid="uid://d0qni50d7l8b2" path="res://assets/backgrounds/library.png" id="2_7ak03"]
+[ext_resource type="Texture2D" uid="uid://6ubp8bgt7ep0" path="res://assets/images/edited scroll.png" id="3_obeme"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_45nl3"]
 texture = ExtResource("2_7ak03")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8n8j1"]
+texture = ExtResource("3_obeme")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_obeme"]
 
 [node name="SelectQuiz" type="Control" unique_id=95589843]
 layout_mode = 3
@@ -24,6 +30,21 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_45nl3")
 
+[node name="Panel2" type="Panel" parent="." unique_id=1667034592]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -612.0
+offset_top = -257.9375
+offset_right = 612.0
+offset_bottom = 369.9375
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_8n8j1")
+
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1359749847]
 layout_mode = 1
 anchors_preset = 8
@@ -31,10 +52,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -457.5
-offset_top = -261.875
-offset_right = 457.5
-offset_bottom = 261.875
+offset_left = -427.4375
+offset_top = -252.98438
+offset_right = 427.4375
+offset_bottom = 252.98438
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 8
@@ -50,16 +71,11 @@ layout_mode = 2
 
 [node name="AddQuizButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1063747878]
 layout_mode = 2
-text = "ADD QUIZ"
+text = "ADD"
 
 [node name="ViewResultsButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=442981702]
 layout_mode = 2
-text = "VIEW QUIZ RESULTS"
-
-[node name="QuizItemList" type="ItemList" parent="MarginContainer/VBoxContainer" unique_id=2062500338]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
+text = "VIEW RESULTS"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=652315664]
 layout_mode = 2
@@ -73,6 +89,27 @@ text = "PLAY"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "DELETE"
+
+[node name="QuizItemList" type="ItemList" parent="." unique_id=2062500338]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -382.5
+offset_top = -112.5
+offset_right = 382.5
+offset_bottom = 238.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.16470589, 0.09411765, 0.0627451, 1)
+theme_override_colors/font_hovered_color = Color(0.105882354, 0.05490196, 0.03137255, 1)
+theme_override_colors/font_hovered_selected_color = Color(0.105882354, 0.05490196, 0.03137255, 1)
+theme_override_colors/font_selected_color = Color(0.105882354, 0.05490196, 0.03137255, 1)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_obeme")
 
 [node name="MarginContainer2" type="MarginContainer" parent="." unique_id=1356204055]
 layout_mode = 1
@@ -96,6 +133,7 @@ horizontal_alignment = 1
 
 [node name="FileDialog" type="FileDialog" parent="." unique_id=1252516429]
 unique_name_in_owner = true
+oversampling_override = 1.0
 title = "Open a File"
 file_mode = 0
 display_mode = 1
@@ -105,6 +143,8 @@ use_native_dialog = true
 
 [node name="AcceptDialog" type="AcceptDialog" parent="." unique_id=1040306509]
 unique_name_in_owner = true
+oversampling_override = 1.0
+size = Vector2i(100, 126)
 
 [node name="MarginContainer3" type="MarginContainer" parent="." unique_id=477286885]
 layout_mode = 1
@@ -117,7 +157,7 @@ theme_override_constants/margin_bottom = 8
 
 [node name="GoToHubButton" type="Button" parent="MarginContainer3" unique_id=485011215]
 layout_mode = 2
-text = "GO TO HUB"
+text = "Return"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/AddQuizButton" to="." method="_on_add_quiz_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/ViewResultsButton" to="." method="_on_view_results_button_pressed"]

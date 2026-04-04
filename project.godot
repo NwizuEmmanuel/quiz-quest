@@ -30,7 +30,6 @@ window/stretch/mode="canvas_items"
 [gui]
 
 theme/custom="uid://dc6o4gyd3plt7"
-theme/custom_font="uid://dg6tin7cec0ty"
 
 [physics]
 
