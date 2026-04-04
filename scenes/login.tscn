@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://cchvw32j2jkhi"]
+
+[ext_resource type="Script" uid="uid://o3pdjq4unatq" path="res://scenes/login.gd" id="1_pymad"]
+[ext_resource type="Texture2D" uid="uid://pna52e6yhada" path="res://assets/backgrounds/alchemy room.png" id="2_nw41r"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0emk2"]
+texture = ExtResource("2_nw41r")
+modulate_color = Color(0.46108878, 0.9999998, 0.4291643, 1)
+
+[node name="Login" type="Control" unique_id=496922243]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pymad")
+
+[node name="Panel" type="Panel" parent="." unique_id=170511801]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_0emk2")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1100169280]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -347.5
+offset_top = -132.5
+offset_right = 347.5
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="Label" type="Label" parent="GridContainer" unique_id=1212706524]
+layout_mode = 2
+text = "Username"
+
+[node name="UsernameInput" type="LineEdit" parent="GridContainer" unique_id=1803823515]
+layout_mode = 2
+size_flags_horizontal = 3
+clear_button_enabled = true
+
+[node name="Label2" type="Label" parent="GridContainer" unique_id=800383595]
+layout_mode = 2
+text = "Password"
+
+[node name="PasswordInput" type="LineEdit" parent="GridContainer" unique_id=1738972426]
+layout_mode = 2
+clear_button_enabled = true
+
+[node name="Control" type="Control" parent="GridContainer" unique_id=561029476]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="GridContainer" unique_id=1809685435]
+layout_mode = 2
+text = "Login"

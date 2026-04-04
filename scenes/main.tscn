@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://5lnq1moklflw"]
 
-[ext_resource type="Script" uid="uid://b46oj7owjjnx" path="res://scenes/main/main.gd" id="1_iuonh"]
+[ext_resource type="Script" uid="uid://b46oj7owjjnx" path="res://scenes/main.gd" id="1_iuonh"]
 [ext_resource type="Texture2D" uid="uid://baevvt56b0o46" path="res://assets/backgrounds/classroom.png" id="2_iuonh"]
 [ext_resource type="FontFile" uid="uid://nx4y1p5c7wfx" path="res://assets/fonts/Kultum Ramadhan.otf" id="3_k2fmo"]
 

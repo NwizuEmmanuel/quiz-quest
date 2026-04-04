@@ -1,9 +1,9 @@
 extends Control
 
-var quiz_items = load(QuizData.quiz_path) as Questions
-var score = QuizData.score
-var total_questions = QuizData.total_questions
-var defeated_boss = QuizData.defeated_boss
+var quiz_items = load(Global.quiz_path) as Questions
+var score = Global.score
+var total_questions = Global.total_questions
+var defeated_boss = Global.defeated_boss
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	show_result()
@@ -20,14 +20,14 @@ func show_result():
 	%ResultRichTextLabel.text = result_text
 
 func _on_go_home_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/main/main.tscn")
+	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 
 func restart_quiz() -> void:
-	QuizData.score = 0
-	QuizData.defeated_boss = false
-	QuizData.failed_questions.clear()
-	get_tree().change_scene_to_file("res://scenes/play_quiz/play_quiz.tscn")
+	Global.score = 0
+	Global.defeated_boss = false
+	Global.failed_questions.clear()
+	get_tree().change_scene_to_file("res://scenes/play_quiz.tscn")
 
 
 func _on_confirmation_dialog_confirmed() -> void:
