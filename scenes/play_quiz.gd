@@ -32,21 +32,36 @@ func _process(_delta: float) -> void:
 		current_quiz_index += 1
 		run_quiz()
 
+func track_student():
+	var path = "user://track_students.res"
+	var file = load(path) as TrackStudents
+	var tracker = TrackStudents.new()
+	if file == null:
+		ResourceSaver.save(tracker, path)
+	else:
+		var player_stats = load("user://player_stats.res")
+		tracker.players.append(player_stats)
+		ResourceSaver.save(player_stats)
 
 func save_data():
 	Global.score = score
 	Global.total_questions = total_questions
 	Global.defeated_boss = defeated_boss
-	DirAccess.make_dir_recursive_absolute("user://quiz_results")
+	DirAccess.make_dir_recursive_absolute("user://quiz_results/")
 	var quiz_title = Global.quiz_title
-	var player_stats = load("user://data/player_stats.res") as PlayerStats
+	var username = Global.username
+	var player_stats = load("user://player_stats.res") as PlayerStats
 	player_stats.score = score
 	player_stats.total_questions = total_questions
-	player_stats.quiz_frequency += 1
-	if defeated_boss:
-		player_stats.defeated_boss_count += 1
+	player_stats.defeated_boss = defeated_boss
+	player_stats.username = username
+	player_stats.password = Global.password
 	player_stats.quiz_title = quiz_title
-	ResourceSaver.save(player_stats, "user://quiz_results/"+quiz_title+".res")
+	player_stats.schedule_date = Global.quiz_schedule_date
+	player_stats.schedule_time_from = Global.quiz_schedule_time_from
+	player_stats.schedule_time_to = Global.quiz_schedule_time_to
+	ResourceSaver.save(player_stats, "user://quiz_results/"+username+".res")
+	track_student()
 
 func deal_damage() -> float:
 	if total_questions <= 0:
@@ -156,7 +171,7 @@ func _on_button_pressed() -> void:
 
 
 func _on_confirmation_dialog_confirmed() -> void:
-	get_tree().change_scene_to_file("res://scenes/select_quiz.tscn")
+	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 # Move distances
 var ATTACK_DISTANCE = 900

@@ -65,6 +65,14 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 82
 text = "QUIZ QUEST"
 
+[node name="FileDialog" type="FileDialog" parent="." unique_id=2048827364]
+title = "Open a File"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.res;Quiz File")
+use_native_dialog = true
+
 [connection signal="pressed" from="VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ViewResultsButton" to="." method="_on_view_results_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitGameButton" to="." method="_on_exit_game_button_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

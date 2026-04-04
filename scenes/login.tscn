@@ -7,6 +7,8 @@
 texture = ExtResource("2_nw41r")
 modulate_color = Color(0.46108878, 0.9999998, 0.4291643, 1)
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_nw41r"]
+
 [node name="Login" type="Control" unique_id=496922243]
 layout_mode = 3
 anchors_preset = 15
@@ -33,35 +35,61 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -347.5
-offset_top = -132.5
+offset_top = -103.75
 offset_right = 347.5
-offset_bottom = 75.0
+offset_bottom = 103.75
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="Label" type="Label" parent="GridContainer" unique_id=1212706524]
+[node name="UsernameLabel" type="Label" parent="GridContainer" unique_id=1212706524]
 layout_mode = 2
 text = "Username"
 
 [node name="UsernameInput" type="LineEdit" parent="GridContainer" unique_id=1803823515]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 clear_button_enabled = true
 
-[node name="Label2" type="Label" parent="GridContainer" unique_id=800383595]
+[node name="PasswordLabel" type="Label" parent="GridContainer" unique_id=800383595]
 layout_mode = 2
 text = "Password"
 
-[node name="PasswordInput" type="LineEdit" parent="GridContainer" unique_id=1738972426]
+[node name="HBoxContainer" type="HBoxContainer" parent="GridContainer" unique_id=572645098]
 layout_mode = 2
+
+[node name="PasswordInput" type="LineEdit" parent="GridContainer/HBoxContainer" unique_id=1738972426]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 clear_button_enabled = true
+secret = true
+
+[node name="ShowPasswordBtn" type="Button" parent="GridContainer/HBoxContainer" unique_id=1824780286]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxLine_nw41r")
+text = "show password"
 
 [node name="Control" type="Control" parent="GridContainer" unique_id=561029476]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="GridContainer" unique_id=1809685435]
+[node name="LoginBtn" type="Button" parent="GridContainer" unique_id=1809685435]
 layout_mode = 2
 text = "Login"
+
+[node name="AcceptDialog" type="AcceptDialog" parent="." unique_id=949289496]
+
+[node name="ReturnBtn" type="Button" parent="." unique_id=934733642]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 64.0
+offset_right = 139.0
+offset_bottom = 111.0
+text = "Return"
+
+[connection signal="pressed" from="GridContainer/HBoxContainer/ShowPasswordBtn" to="." method="_on_show_password_btn_pressed"]
+[connection signal="pressed" from="GridContainer/LoginBtn" to="." method="_on_login_btn_pressed"]
+[connection signal="pressed" from="ReturnBtn" to="." method="_on_return_btn_pressed"]
