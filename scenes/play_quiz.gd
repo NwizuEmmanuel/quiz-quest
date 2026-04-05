@@ -34,14 +34,30 @@ func _process(_delta: float) -> void:
 
 func track_student():
 	var path = "user://track_students.res"
-	var file = load(path) as TrackStudents
-	var tracker = TrackStudents.new()
-	if file == null:
-		ResourceSaver.save(tracker, path)
+	var tracker: TrackStudents
+	
+	# 1. Load the existing file if it exists, otherwise create a new one
+	if FileAccess.file_exists(path):
+		tracker = load(path) as TrackStudents
 	else:
-		var player_stats = load("user://player_stats.res")
-		tracker.players.append(player_stats)
-		ResourceSaver.save(player_stats)
+		tracker = TrackStudents.new()
+	
+	# 2. Load the current student's performance
+	var current_stats = load("user://player_stats.res")
+	
+	if current_stats != null:
+		# 3. Add the new stats to the existing list
+		tracker.players.append(current_stats)
+		
+		# 4. Save the ENTIRE updated tracker back to the file
+		var error = ResourceSaver.save(tracker, path)
+		
+		if error == OK:
+			print("Student tracking updated successfully.")
+		else:
+			print("Failed to save tracker. Error: ", error)
+	else:
+		print("Error: player_stats.res not found. Nothing to track.")
 
 func save_data():
 	Global.score = score
@@ -60,7 +76,9 @@ func save_data():
 	player_stats.schedule_date = Global.quiz_schedule_date
 	player_stats.schedule_time_from = Global.quiz_schedule_time_from
 	player_stats.schedule_time_to = Global.quiz_schedule_time_to
+	player_stats.date_added = Time.get_datetime_string_from_system(false,true)
 	ResourceSaver.save(player_stats, "user://quiz_results/"+username+".res")
+	ResourceSaver.save(player_stats, "user://player_stats.res")
 	track_student()
 
 func deal_damage() -> float:

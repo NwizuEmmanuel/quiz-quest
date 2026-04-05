@@ -8,10 +8,6 @@ extends Control
 func _ready() -> void:
 	delete_folder_recursive("user://quiz_results/")
 
-func is_student_taken_quiz()->bool:
-	var quiz_file = load(Global.quiz_path) as Questions
-	return false
-
 func _on_show_password_btn_pressed() -> void:
 	password_input.secret = !password_input.secret
 
@@ -67,34 +63,50 @@ func show_dialog(mssg: String):
 	accept_dialog.popup_centered()
 
 func _on_login_btn_pressed() -> void:
-	var now = Time.get_date_string_from_system()
-	Global.username = username_input.text.strip_edges()
-	Global.password = password_input.text.strip_edges()
+	var input_user = username_input.text.strip_edges()
+	var input_pass = password_input.text.strip_edges()
+	
+	# 1. Load Files & Setup
 	var quiz_file = load(Global.quiz_path) as Questions
 	var from = quiz_file.schedule_time_from
 	var to = quiz_file.schedule_time_to
+	
+	# 2. Check Schedule First (Don't even look at users if time is wrong)
+	if is_time_in_range_complex(from, to):
+		delete_folder_recursive("user://quiz_results/")
+		show_dialog("Access Denied: Outside of scheduled time.")
+		return # Stop here
+
+	# 3. Find if the student exists in participants
+	var current_student = null
+	for p in quiz_file.participants:
+		if p.username == input_user and p.password == input_pass:
+			current_student = p
+			break # Found them! Stop looking.
+
+	if current_student == null:
+		show_dialog("Access Denied: User not found or wrong password.")
+		return
+
+	# 4. Check Tracking (Has the student already played?)
+	var tracker = load("user://track_students.res") as TrackStudents
+	if tracker != null:
+		for j in tracker.players:
+			if j.username == input_user:
+				# Compare specific quiz details to see if THIS specific one was taken
+				if j.schedule_date == quiz_file.schedule_date and j.schedule_time_from == from:
+					show_dialog("You have already taken this quiz.")
+					return
+
+	# 5. Success: Save to Global and Change Scene
+	Global.username = input_user
+	Global.password = input_pass
+	Global.quiz_title = quiz_file.title
 	Global.quiz_schedule_time_from = from
 	Global.quiz_schedule_time_to = to
 	Global.quiz_schedule_date = quiz_file.schedule_date
 	
-	var tracker = load("user://track_students.res") as TrackStudents
-	if tracker != null:
-		for i in tracker.players:
-			if Global.username == i.username and Global.password == i.password:
-				if Global.quiz_schedule_date == i.schedule_date and Global.quiz_schedule_time_from == i.schedule_time_from and Global.quiz_schedule_time_to == i.schedule_time_to:
-					show_dialog("You already taken this quiz.")
-					return
-	for i in quiz_file.participants:
-		if quiz_file.schedule_date == now and is_time_in_range_complex(from,to):
-			if Global.username == i.username and Global.password == i.password:
-				get_tree().change_scene_to_file("res://scenes/play_quiz.tscn")
-			else:
-				accept_dialog.dialog_text = "Access Denied: User not found."
-				accept_dialog.popup_centered()
-		else:
-			delete_folder_recursive("user://quiz_results/")
-			accept_dialog.dialog_text = "Access Denied: Outside of schedule time."
-			accept_dialog.popup_centered()
+	get_tree().change_scene_to_file("res://scenes/play_quiz.tscn")
 
 
 func _on_return_btn_pressed() -> void:
