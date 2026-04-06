@@ -33,12 +33,6 @@ func _process(_delta: float) -> void:
 	%TimerLabel.text = "TIME: %d" % int(%QuizTimer.time_left)
 	%ScoreLabel.text = "SCORE: %d/%d" % [score, total_questions]
 	
-	if %QuizTimer.time_left == 0:
-		deal_player_damage()
-		show_player_mssg("TOO LATE")
-		current_quiz_index += 1
-		run_quiz()
-
 func track_student():
 	var path = "user://track_students.res"
 	var tracker: TrackStudents
