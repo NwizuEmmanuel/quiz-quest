@@ -9,6 +9,7 @@ extends Node
 var folder_path: String = "user://quiz_results/"
 
 func _ready():
+	$viewstatbgm.play()
 	DirAccess.dir_exists_absolute(folder_path)
 	# 1. Setup ItemList
 	item_list.item_selected.connect(_on_item_selected)

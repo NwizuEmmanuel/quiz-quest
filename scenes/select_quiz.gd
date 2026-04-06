@@ -3,6 +3,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$selectquizbgm.play()
 	update_quiz_list()
 
 

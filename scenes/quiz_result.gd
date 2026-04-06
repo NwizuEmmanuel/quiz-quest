@@ -6,17 +6,18 @@ var total_questions = Global.total_questions
 var defeated_boss = Global.defeated_boss
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$quizresultbgm.play()
 	show_result()
 
 func show_result():
 	var result_text = "SCORE: %d/%d\n" % [score,total_questions]
 	if defeated_boss:
-		result_text += "DEFEATED THE BOSS"
+		result_text += "YOU BEAT THE BOSS!"
 		#$ConfirmationDialog.title = "VICTORY"
 		#$ConfirmationDialog.dialog_text = "You defeated the boss! As your reward you can retake the quiz. Your choice?"
 		#$ConfirmationDialog.popup_centered()
 	else:
-		result_text += "YOU LOSS!"
+		result_text += "YOU WERE DEFEATED!"
 	%ResultRichTextLabel.text = result_text
 
 func _on_go_home_button_pressed() -> void:

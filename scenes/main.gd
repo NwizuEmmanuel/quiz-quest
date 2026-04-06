@@ -1,9 +1,12 @@
 extends Control
 
 
+	
+func _ready():
+	$Gamestartbgm.play()
+
 func _on_create_quiz_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/add_quiz.tscn") 
-
 
 func _on_start_game_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/select_quiz.tscn")

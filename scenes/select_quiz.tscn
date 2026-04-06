@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bxbw0kdcc4o5q" path="res://scenes/select_quiz.gd" id="1_7ak03"]
 [ext_resource type="Texture2D" uid="uid://d0qni50d7l8b2" path="res://assets/backgrounds/library.png" id="2_7ak03"]
 [ext_resource type="Texture2D" uid="uid://6ubp8bgt7ep0" path="res://assets/images/edited scroll.png" id="3_obeme"]
+[ext_resource type="AudioStream" uid="uid://cnqgfootnl67q" path="res://assets/bgm/OGG/selectquiz.ogg" id="4_i801y"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_45nl3"]
 texture = ExtResource("2_7ak03")
@@ -68,12 +69,15 @@ layout_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1028402222]
 layout_mode = 2
+alignment = 1
 
 [node name="AddQuizButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1063747878]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "ADD"
 
 [node name="ViewResultsButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=442981702]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "VIEW RESULTS"
 
@@ -158,6 +162,10 @@ theme_override_constants/margin_bottom = 8
 [node name="GoToHubButton" type="Button" parent="MarginContainer3" unique_id=485011215]
 layout_mode = 2
 text = "Return"
+
+[node name="selectquizbgm" type="AudioStreamPlayer" parent="." unique_id=998910842]
+stream = ExtResource("4_i801y")
+volume_db = -20.0
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/AddQuizButton" to="." method="_on_add_quiz_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/ViewResultsButton" to="." method="_on_view_results_button_pressed"]

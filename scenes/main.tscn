@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b46oj7owjjnx" path="res://scenes/main.gd" id="1_iuonh"]
 [ext_resource type="Texture2D" uid="uid://baevvt56b0o46" path="res://assets/backgrounds/classroom.png" id="2_iuonh"]
 [ext_resource type="FontFile" uid="uid://nx4y1p5c7wfx" path="res://assets/fonts/Kultum Ramadhan.otf" id="3_k2fmo"]
+[ext_resource type="AudioStream" uid="uid://kj2ax1j5ih5a" path="res://assets/bgm/OGG/startgamebg.ogg" id="4_jyhfs"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w6xti"]
 texture = ExtResource("2_iuonh")
@@ -75,6 +76,10 @@ theme_override_constants/shadow_outline_size = 9
 theme_override_fonts/font = ExtResource("3_k2fmo")
 theme_override_font_sizes/font_size = 89
 text = "QUIZQUEST"
+
+[node name="Gamestartbgm" type="AudioStreamPlayer" parent="." unique_id=839877674]
+stream = ExtResource("4_jyhfs")
+volume_db = -20.0
 
 [connection signal="pressed" from="VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ViewResultsButton" to="." method="_on_view_results_button_pressed"]

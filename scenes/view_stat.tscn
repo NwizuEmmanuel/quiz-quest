@@ -4,6 +4,8 @@
 [ext_resource type="Theme" uid="uid://dc6o4gyd3plt7" path="res://themes/ui_theme.theme" id="1_xxs4l"]
 [ext_resource type="Texture2D" uid="uid://7fokg62drnrk" path="res://assets/backgrounds/name bg.png" id="2_77s2t"]
 [ext_resource type="Texture2D" uid="uid://bjvfoo5cyqjqh" path="res://assets/images/vertical scroll png.png" id="4_6m0xe"]
+[ext_resource type="Texture2D" uid="uid://ea7x2jd45nmi" path="res://assets/textures/Tiny Swords (Update 010)/UI/Banners/Banner_Horizontal.png" id="5_t3hqt"]
+[ext_resource type="AudioStream" uid="uid://dgu2kidpj2ald" path="res://assets/bgm/OGG/viewstat.ogg" id="6_ndjbe"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_77s2t"]
 texture = ExtResource("2_77s2t")
@@ -12,6 +14,20 @@ modulate_color = Color(0.42595553, 0.42595553, 0.4259555, 1)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ueyao"]
 texture = ExtResource("4_6m0xe")
 region_rect = Rect2(3, 1, 71, 92)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ndjbe"]
+texture = ExtResource("5_t3hqt")
+region_rect = Rect2(33, 47, 126, 123)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ctjpr"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xc3o0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eiyqe"]
+texture = ExtResource("4_6m0xe")
+region_rect = Rect2(474, 20, 424, 718)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eiyqe"]
 
 [node name="ViewStat" type="Control" unique_id=1879957109]
 layout_mode = 3
@@ -71,8 +87,18 @@ text = "Your Name"
 
 [node name="YourNameInput" type="LineEdit" parent="MarginContainer/VBoxContainer/VBoxContainer/GridContainer" unique_id=1615967224]
 unique_name_in_owner = true
+texture_filter = 1
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.16470589, 0.09411765, 0.0627451, 1)
+theme_override_colors/font_selected_color = Color(0.105882354, 0.05490196, 0.03137255, 1)
+theme_override_colors/font_placeholder_color = Color(0.11, 0.057383332, 0.033, 0.47058824)
+theme_override_colors/caret_color = Color(0.95, 0.95, 0.95, 0)
+theme_override_styles/normal = SubResource("StyleBoxTexture_ndjbe")
+theme_override_styles/read_only = SubResource("StyleBoxTexture_ctjpr")
+theme_override_styles/focus = SubResource("StyleBoxTexture_xc3o0")
+placeholder_text = "Enter Name"
+alignment = 1
 
 [node name="Control" type="Control" parent="MarginContainer/VBoxContainer/VBoxContainer/GridContainer" unique_id=1250878284]
 layout_mode = 2
@@ -97,11 +123,6 @@ text = "Export"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ItemList" type="ItemList" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1695548284]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=63996231]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -115,11 +136,45 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer" unique_id=1063447572]
+[node name="Panel3" type="Panel" parent="." unique_id=106195868]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 180.0
+offset_right = -754.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_eiyqe")
+
+[node name="ItemList" type="ItemList" parent="." unique_id=1695548284]
 unique_name_in_owner = true
-layout_mode = 2
+texture_filter = 1
+layout_mode = 0
+offset_left = 55.0
+offset_top = 233.0
+offset_right = 348.0
+offset_bottom = 527.0
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.16470589, 0.09411765, 0.0627451, 1)
+theme_override_colors/font_hovered_color = Color(0.105882354, 0.05490196, 0.03137255, 1)
+theme_override_colors/font_hovered_selected_color = Color(0.105882354, 0.05490196, 0.03137255, 1)
+theme_override_colors/font_selected_color = Color(0.105882354, 0.05490196, 0.03137255, 1)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_eiyqe")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1063447572]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 528.0
+offset_top = 38.0
+offset_right = 988.0
+offset_bottom = 613.0
 bbcode_enabled = true
 fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ExportFolderDialog" type="FileDialog" parent="." unique_id=1401058512]
 title = "Open a Directory"
@@ -129,6 +184,10 @@ access = 2
 use_native_dialog = true
 
 [node name="AcceptDialog" type="AcceptDialog" parent="." unique_id=549592233]
+
+[node name="viewstatbgm" type="AudioStreamPlayer" parent="." unique_id=463740606]
+stream = ExtResource("6_ndjbe")
+volume_db = -25.0
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/GridContainer/SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/GoBackButton" to="." method="_on_go_back_button_pressed"]
