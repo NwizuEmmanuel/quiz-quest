@@ -18,7 +18,7 @@ func _ready():
 	load_file_list()
 
 func load_file_list():
-	var player_stats = load("user://data/player_stats.res") as PlayerStats
+	var player_stats = load("user://player_stats.res") as PlayerStats
 	change_all_usernames(player_stats.username)
 	item_list.clear()
 	
@@ -157,9 +157,9 @@ func update_single_file(path: String, new_name: String):
 
 func _on_save_button_pressed() -> void:
 	var new_name = %YourNameInput.text
-	var player_stats = load("user://data/player_stats.res") as PlayerStats
+	var player_stats = load("user://player_stats.res") as PlayerStats
 	player_stats.username = new_name
-	ResourceSaver.save(player_stats,"user://data/player_stats.res")
+	ResourceSaver.save(player_stats,"user://player_stats.res")
 	change_all_usernames(new_name)
 	accept_dialog.dialog_text = "All result have been updated."
 	accept_dialog.popup_centered()

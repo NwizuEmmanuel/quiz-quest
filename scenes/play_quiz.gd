@@ -33,21 +33,60 @@ func _process(_delta: float) -> void:
 	%TimerLabel.text = "TIME: %d" % int(%QuizTimer.time_left)
 	%ScoreLabel.text = "SCORE: %d/%d" % [score, total_questions]
 	
+	if %QuizTimer.time_left == 0:
+		deal_player_damage()
+		show_player_mssg("TOO LATE")
+		current_quiz_index += 1
+		run_quiz()
+
+func track_student():
+	var path = "user://track_students.res"
+	var tracker: TrackStudents
+	
+	# 1. Load the existing file if it exists, otherwise create a new one
+	if FileAccess.file_exists(path):
+		tracker = load(path) as TrackStudents
+	else:
+		tracker = TrackStudents.new()
+	
+	# 2. Load the current student's performance
+	var current_stats = load("user://player_stats.res")
+	
+	if current_stats != null:
+		# 3. Add the new stats to the existing list
+		tracker.players.append(current_stats)
+		
+		# 4. Save the ENTIRE updated tracker back to the file
+		var error = ResourceSaver.save(tracker, path)
+		
+		if error == OK:
+			print("Student tracking updated successfully.")
+		else:
+			print("Failed to save tracker. Error: ", error)
+	else:
+		print("Error: player_stats.res not found. Nothing to track.")
 
 func save_data():
 	Global.score = score
 	Global.total_questions = total_questions
 	Global.defeated_boss = defeated_boss
-	DirAccess.make_dir_recursive_absolute("user://quiz_results")
+	DirAccess.make_dir_recursive_absolute("user://quiz_results/")
 	var quiz_title = Global.quiz_title
-	var player_stats = load("user://data/player_stats.res") as PlayerStats
+	var username = Global.username
+	var player_stats = load("user://player_stats.res") as PlayerStats
 	player_stats.score = score
 	player_stats.total_questions = total_questions
-	player_stats.quiz_frequency += 1
-	if defeated_boss:
-		player_stats.defeated_boss_count += 1
+	player_stats.defeated_boss = defeated_boss
+	player_stats.username = username
+	player_stats.password = Global.password
 	player_stats.quiz_title = quiz_title
-	ResourceSaver.save(player_stats, "user://quiz_results/"+quiz_title+".res")
+	player_stats.schedule_date = Global.quiz_schedule_date
+	player_stats.schedule_time_from = Global.quiz_schedule_time_from
+	player_stats.schedule_time_to = Global.quiz_schedule_time_to
+	player_stats.date_added = Time.get_datetime_string_from_system(false,true)
+	ResourceSaver.save(player_stats, "user://quiz_results/"+username+".res")
+	ResourceSaver.save(player_stats, "user://player_stats.res")
+	track_student()
 
 func deal_damage() -> float:
 	if total_questions <= 0:
@@ -174,7 +213,7 @@ func _on_button_pressed() -> void:
 
 
 func _on_confirmation_dialog_confirmed() -> void:
-	get_tree().change_scene_to_file("res://scenes/select_quiz.tscn")
+	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 
 ## Player attacks from Left to Right
