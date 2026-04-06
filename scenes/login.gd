@@ -86,9 +86,11 @@ func _on_login_btn_pressed() -> void:
 
 	# 3. Find if the student exists in participants
 	var current_student = null
+	var fullname = null
 	for p in quiz_file.participants:
 		if p.username == input_user and p.password == input_pass:
 			current_student = p
+			fullname = p.fullname
 			break # Found them! Stop looking.
 
 	if current_student == null:
@@ -108,12 +110,13 @@ func _on_login_btn_pressed() -> void:
 	# 5. Success: Save to Global and Change Scene
 	Global.username = input_user
 	Global.password = input_pass
+	Global.fullname = fullname
 	Global.quiz_title = quiz_file.title
 	Global.quiz_schedule_time_from = from
 	Global.quiz_schedule_time_to = to
 	Global.quiz_schedule_date = quiz_file.schedule_date
 	
-	get_tree().change_scene_to_file("res://scenes/play_quiz.tscn")
+	get_tree().change_scene_to_file("res://scenes/start_game.tscn")
 
 
 func _on_return_btn_pressed() -> void:

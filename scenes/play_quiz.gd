@@ -67,12 +67,16 @@ func save_data():
 	DirAccess.make_dir_recursive_absolute("user://quiz_results/")
 	var quiz_title = Global.quiz_title
 	var username = Global.username
-	var player_stats = load("user://player_stats.res") as PlayerStats
+	var player_stats = PlayerStats.new()
 	player_stats.score = score
 	player_stats.total_questions = total_questions
-	player_stats.defeated_boss = defeated_boss
+	if defeated_boss:
+		player_stats.defeated_boss = "yes"
+	else:
+		player_stats.defeated_boss = "no"
 	player_stats.username = username
 	player_stats.password = Global.password
+	player_stats.fullname = Global.fullname
 	player_stats.quiz_title = quiz_title
 	player_stats.schedule_date = Global.quiz_schedule_date
 	player_stats.schedule_time_from = Global.quiz_schedule_time_from

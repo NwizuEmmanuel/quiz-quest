@@ -2,6 +2,7 @@ extends Node
 
 var username = ""
 var password = ""
+var fullname = ""
 var quiz_path = ""
 var quiz_title = ""
 var total_questions = 0

@@ -7,7 +7,8 @@ class_name PlayerStats
 @export var quiz_title: String = ""
 @export var username: String = ""
 @export var password: String = ""
-@export var defeated_boss: bool
+@export var fullname: String = ""
+@export var defeated_boss: String
 @export var date_added:String
 @export var schedule_date: String
 @export var schedule_time_from: String

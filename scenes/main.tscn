@@ -91,8 +91,10 @@ use_native_dialog = true
 [node name="PcNumberLabel" type="Label" parent="." unique_id=781942962]
 unique_name_in_owner = true
 layout_mode = 0
-offset_right = 193.0
-offset_bottom = 53.0
+offset_left = 114.0
+offset_top = 43.0
+offset_right = 307.0
+offset_bottom = 118.0
 theme_override_font_sizes/font_size = 40
 text = "Nothing yet"
 horizontal_alignment = 2
