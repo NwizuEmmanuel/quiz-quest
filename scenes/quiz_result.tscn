@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bbbrfbdcykfpg" path="res://scenes/quiz_result.gd" id="1_sb3je"]
 [ext_resource type="Texture2D" uid="uid://oxjrshl8n5b4" path="res://assets/backgrounds/window.png" id="2_sb3je"]
+[ext_resource type="AudioStream" uid="uid://bmoum6dj3onwl" path="res://assets/bgm/OGG/quizend.ogg" id="3_5v2o4"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5v2o4"]
 texture = ExtResource("2_sb3je")
@@ -44,7 +45,7 @@ alignment = 1
 
 [node name="GoHomeButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=937698386]
 layout_mode = 2
-text = "GO HOME"
+text = "Return"
 
 [node name="ResultRichTextLabel" type="RichTextLabel" parent="." unique_id=2060370101]
 unique_name_in_owner = true
@@ -74,6 +75,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=1848957708]
+
+[node name="quizresultbgm" type="AudioStreamPlayer" parent="." unique_id=233728061]
+stream = ExtResource("3_5v2o4")
+volume_db = -20.0
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/GoHomeButton" to="." method="_on_go_home_button_pressed"]
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]

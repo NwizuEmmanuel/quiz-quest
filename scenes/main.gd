@@ -4,15 +4,18 @@ extends Control
 @onready var pc_number_label: Label = %PcNumberLabel
 
 func _ready() -> void:
+	$Gamestartbgm.play()
 	var pc_number = load("user://pc_number.res")
 	if pc_number == null:
 		get_tree().change_scene_to_file("res://scenes/assign_pc_number.tscn") 
 	else:
 		pc_number_label.text = "PC Number: %s" % pc_number.pc_number
 
+	
+
+	
 func _on_create_quiz_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/add_quiz.tscn") 
-
 
 func _on_start_game_button_pressed() -> void:
 	file_dialog.popup_centered()
