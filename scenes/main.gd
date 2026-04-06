@@ -2,6 +2,11 @@ extends Control
 
 @onready var file_dialog = $FileDialog
 
+func _ready() -> void:
+	var pc_number = load("user://pc_number.res")
+	if pc_number == null:
+		get_tree().change_scene_to_file("res://scenes/assign_pc_number.tscn")
+
 func _on_create_quiz_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/add_quiz.tscn") 
 

@@ -71,8 +71,15 @@ func _on_login_btn_pressed() -> void:
 	var from = quiz_file.schedule_time_from
 	var to = quiz_file.schedule_time_to
 	
+	# check user pc
+	var pc_number_res = load("user://pc_number.res")
+	for p in quiz_file.participants:
+		if p.pc_number != pc_number_res.pc_number:
+			show_dialog("Asses Denied: Unauthorized use of PC.")
+			return
+	
 	# 2. Check Schedule First (Don't even look at users if time is wrong)
-	if is_time_in_range_complex(from, to):
+	if not is_time_in_range_complex(from, to):
 		delete_folder_recursive("user://quiz_results/")
 		show_dialog("Access Denied: Outside of scheduled time.")
 		return # Stop here
