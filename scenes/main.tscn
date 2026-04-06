@@ -72,6 +72,16 @@ access = 2
 filters = PackedStringArray("*.res;Quiz File")
 use_native_dialog = true
 
+[node name="PcNumberLabel" type="Label" parent="." unique_id=781942962]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 193.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 40
+text = "Nothing yet"
+horizontal_alignment = 2
+vertical_alignment = 2
+
 [connection signal="pressed" from="VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ViewResultsButton" to="." method="_on_view_results_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitGameButton" to="." method="_on_exit_game_button_pressed"]
