@@ -45,11 +45,6 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Start"
 
-[node name="ViewResultsButton" type="Button" parent="VBoxContainer" unique_id=1622795821]
-layout_mode = 2
-size_flags_vertical = 3
-text = "View Results"
-
 [node name="ExitGameButton" type="Button" parent="VBoxContainer" unique_id=1382486239]
 layout_mode = 2
 size_flags_vertical = 3
@@ -101,6 +96,5 @@ horizontal_alignment = 2
 vertical_alignment = 2
 
 [connection signal="pressed" from="VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/ViewResultsButton" to="." method="_on_view_results_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitGameButton" to="." method="_on_exit_game_button_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
