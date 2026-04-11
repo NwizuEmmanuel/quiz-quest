@@ -16,6 +16,10 @@
 [ext_resource type="AudioStream" uid="uid://cdnkoxmobc64t" path="res://assets/bgm/fx/hitfx.wav" id="13_xrl37"]
 [ext_resource type="AudioStream" uid="uid://i01yf7ykohrn" path="res://assets/bgm/fx/earth.wav" id="14_uinn6"]
 [ext_resource type="AudioStream" uid="uid://cambjplvbkwd0" path="res://assets/bgm/fx/characterdeath.wav" id="16_nc465"]
+[ext_resource type="Script" uid="uid://c3r0iuiptbd12" path="res://scenes/quiz_service.gd" id="17_n8d63"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqlri"]
+bg_color = Color(0.6, 0.6, 0.6, 0.3764706)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nc465"]
 bg_color = Color(1, 0, 0, 1)
@@ -580,6 +584,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fqlri")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1953732103]
 layout_mode = 1
@@ -792,7 +797,10 @@ stream = ExtResource("14_uinn6")
 [node name="characterdeathfx" type="AudioStreamPlayer" parent="." unique_id=260145271]
 stream = ExtResource("16_nc465")
 
-[connection signal="text_submitted" from="VBoxContainer/IdentificationAnswerBox/IdentificationAnswerLineEdit" to="." method="_on_identification_answer_line_edit_text_submitted"]
+[node name="QuizService" type="HTTPRequest" parent="." unique_id=1093275455]
+script = ExtResource("17_n8d63")
+
+[connection signal="text_submitted" from="VBoxContainer/IdentificationAnswerBox/IdentificationAnswerLineEdit" to="." method="check_identification_answer"]
 [connection signal="pressed" from="VBoxContainer/MultipleChoiceOptionsBox/OptionA" to="." method="_on_option_a_pressed"]
 [connection signal="pressed" from="VBoxContainer/MultipleChoiceOptionsBox/OptionB" to="." method="_on_option_b_pressed"]
 [connection signal="pressed" from="VBoxContainer/MultipleChoiceOptionsBox/OptionC" to="." method="_on_option_c_pressed"]

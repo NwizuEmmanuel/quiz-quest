@@ -6,7 +6,7 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0emk2"]
 texture = ExtResource("2_nw41r")
-modulate_color = Color(0.4627451, 1, 0.42745098, 0.44705883)
+modulate_color = Color(0.46108878, 0.9999998, 0.4291643, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_nw41r"]
 
@@ -105,6 +105,5 @@ text = "Return"
 script = ExtResource("3_0emk2")
 
 [connection signal="pressed" from="GridContainer/HBoxContainer/ShowPasswordBtn" to="." method="_on_show_password_btn_pressed"]
-[connection signal="pressed" from="GridContainer/LoginBtn" to="." method="_on_login_button_pressed"]
+[connection signal="pressed" from="GridContainer/LoginBtn" to="." method="_on_login_btn_pressed"]
 [connection signal="pressed" from="ReturnBtn" to="." method="_on_return_btn_pressed"]
-[connection signal="login_completed" from="QuizService" to="." method="_on_quiz_service_login_completed"]

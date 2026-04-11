@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://baevvt56b0o46" path="res://assets/backgrounds/classroom.png" id="1_c75kr"]
 [ext_resource type="Script" uid="uid://cpu31nhgcv3j2" path="res://scenes/start_game.gd" id="1_tq2sd"]
+[ext_resource type="Script" uid="uid://c3r0iuiptbd12" path="res://scenes/quiz_service.gd" id="3_2aiwh"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tq2sd"]
 texture = ExtResource("1_c75kr")
@@ -40,4 +41,10 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 28
 text = "START GAME"
 
+[node name="QuizService" type="HTTPRequest" parent="." unique_id=315779959]
+script = ExtResource("3_2aiwh")
+
 [connection signal="pressed" from="StartGameBtn" to="." method="_on_start_game_btn_pressed"]
+[connection signal="error_occurred" from="QuizService" to="." method="_on_quiz_service_error_occurred"]
+[connection signal="quiz_downloaded" from="QuizService" to="." method="_on_quiz_service_quiz_downloaded"]
+[connection signal="schedules_received" from="QuizService" to="." method="_on_quiz_service_schedules_received"]
