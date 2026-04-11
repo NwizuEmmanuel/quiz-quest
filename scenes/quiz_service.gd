@@ -34,8 +34,15 @@ func download_quiz(schedule_id: int):
 	var headers = ["Content-Type: application/json"]
 	request(url, headers, HTTPClient.METHOD_POST, body)
 
-func submit_result(s_id: int, title: String, score: int, total: int):
-	var body = JSON.stringify({"student_id": s_id, "quiz_title": title, "score": score, "total": total})
+func submit_result(s_id: int, title: String, score: int, total: int,defeated_boss: String, history: Array):
+	var body = JSON.stringify({
+		"student_id": s_id, 
+		"quiz_title": title, 
+		"score": score, 
+		"total": total,
+		"defeated_boss": defeated_boss,
+		"quiz_details": history # This is the detailed breakdown
+		})
 	request(BASE_URL + "/submit_results", ["Content-Type: application/json"], HTTPClient.METHOD_POST, body)
 
 # --- CALLBACK HANDLER ---

@@ -20,3 +20,7 @@ func _on_quiz_service_login_completed(success, data):
 	else:
 		accept_dialog.dialog_text = "Invalid username or password."
 		accept_dialog.popup_centered()
+
+
+func _on_show_password_btn_pressed() -> void:
+	pass_input.secret = !pass_input.secret

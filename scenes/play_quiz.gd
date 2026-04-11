@@ -3,6 +3,7 @@ extends Control
 # Quiz Data (Now populated via API)
 var quiz_data: Dictionary
 var quiz_items: Array = []
+var quiz_history = [] # Stores the breakdown of every question
 
 var current_quiz_index = 0
 var total_questions = 0
@@ -51,6 +52,7 @@ func attack_player():
 		%PlayerSprite2D.play("idle")
 
 	%BossSprite2D.play("idle")
+
 func _ready() -> void:
 	$playquizbgm.play()
 	
@@ -66,6 +68,7 @@ func _ready() -> void:
 	run_quiz()
 
 func _process(_delta: float) -> void:
+	%TimerLabel.text = str(round(%QuizTimer.time_left))
 	%ScoreLabel.text = "%d/%d" % [score, total_questions]
 	Global.score = score
 	Global.total_questions = total_questions
@@ -102,19 +105,18 @@ func run_quiz():
 		%OptionD.text = quiz.options[3]
 
 func save_to_server():
-	# Use .get() to provide a fallback title if 'title' is missing
 	var quiz_title = quiz_data.get("title", "Untitled Quiz")
-
-	# Debug: Print the data to see what the server actually sent
-	print("Saving results for quiz: ", quiz_title)
-	print("Quiz Data content: ", quiz_data)
-
-	# Call the API
+	var defeated_boss_text = "no"
+	if defeated_boss:
+		defeated_boss_text = "yes"
+	# UPDATED: Pass quiz_history to the service
 	quiz_service.submit_result(
 		Global.student_id, 
 		quiz_title, 
 		score, 
-		total_questions
+		total_questions,
+		defeated_boss_text,
+		quiz_history
 	)
 
 	await get_tree().create_timer(1.0).timeout
@@ -126,8 +128,17 @@ func check_identification_answer(ans: String) -> void:
 	set_input_enabled(false)
 	
 	var quiz = quiz_items[current_quiz_index]
-	# Check string answer
-	if ans.to_upper() == str(quiz.answer).to_upper():
+	var is_correct = (ans.to_upper() == str(quiz.answer).to_upper())
+
+	# --- LOG HISTORY ---
+	quiz_history.append({
+		"question": quiz.question,
+		"student_answer": ans if ans != "" else "[No Answer]",
+		"correct_answer": quiz.answer,
+		"status": "Correct" if is_correct else "Failed"
+	})
+	
+	if is_correct:
 		score += 1
 		await deal_boss_damage()
 		await show_player_mssg("CORRECT")
@@ -146,8 +157,17 @@ func check_multiple_choice_answer(ans_text: String) -> void:
 	set_input_enabled(false)
 	
 	var quiz = quiz_items[current_quiz_index]
-	# In our JSON, 'answer' is the actual text of the correct option
-	if ans_text == str(quiz.answer):
+	var is_correct = (ans_text == str(quiz.answer))
+
+	# --- LOG HISTORY ---
+	quiz_history.append({
+		"question": quiz.question,
+		"student_answer": ans_text,
+		"correct_answer": quiz.answer,
+		"status": "Correct" if is_correct else "Failed"
+	})
+	
+	if is_correct:
 		score += 1
 		await deal_boss_damage()
 		await show_player_mssg("CORRECT")
@@ -160,13 +180,7 @@ func check_multiple_choice_answer(ans_text: String) -> void:
 	is_turn_processing = false
 	set_input_enabled(true)
 
-# --- Button Logic Updated for Text-based Comparison ---
-func _on_option_a_pressed(): check_multiple_choice_answer(%OptionA.text)
-func _on_option_b_pressed(): check_multiple_choice_answer(%OptionB.text)
-func _on_option_c_pressed(): check_multiple_choice_answer(%OptionC.text)
-func _on_option_d_pressed(): check_multiple_choice_answer(%OptionD.text)
-
-# --- Damage & Animations (Keep as is, but simplified) ---
+# --- Damage Calculation ---
 func deal_damage() -> float:
 	return (100.0 / max(1, total_questions)) + %QuizTimer.time_left
 
@@ -189,3 +203,37 @@ func set_input_enabled(enabled: bool):
 	%OptionD.disabled = !enabled
 	%IdentificationAnswerLineEdit.editable = enabled
 	if enabled: %IdentificationAnswerLineEdit.clear()
+
+func _on_quiz_timer_timeout() -> void:
+	if is_turn_processing: return
+
+	is_turn_processing = true
+	set_input_enabled(false)
+	
+	var quiz = quiz_items[current_quiz_index]
+	
+	# --- LOG HISTORY FOR TIMEOUT ---
+	quiz_history.append({
+		"question": quiz.question,
+		"student_answer": "[TIME OUT]",
+		"correct_answer": quiz.answer,
+		"status": "Failed"
+	})
+
+	await deal_player_damage() 
+	await show_player_mssg("TIME'S UP!")
+
+	current_quiz_index += 1
+	await get_tree().create_timer(1.0).timeout
+
+	run_quiz()
+	is_turn_processing = false
+	set_input_enabled(true)
+
+func _on_option_a_pressed(): check_multiple_choice_answer(%OptionA.text)
+func _on_option_b_pressed(): check_multiple_choice_answer(%OptionB.text)
+func _on_option_c_pressed(): check_multiple_choice_answer(%OptionC.text)
+func _on_option_d_pressed(): check_multiple_choice_answer(%OptionD.text)
+
+func _on_quit_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/quiz_result.tscn")

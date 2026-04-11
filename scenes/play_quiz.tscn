@@ -744,7 +744,7 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 one_shot = true
 
-[node name="Button" type="Button" parent="." unique_id=967828234]
+[node name="QuitButton" type="Button" parent="." unique_id=967828234]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -806,5 +806,5 @@ script = ExtResource("17_n8d63")
 [connection signal="pressed" from="VBoxContainer/MultipleChoiceOptionsBox/OptionC" to="." method="_on_option_c_pressed"]
 [connection signal="pressed" from="VBoxContainer/MultipleChoiceOptionsBox/OptionD" to="." method="_on_option_d_pressed"]
 [connection signal="timeout" from="QuizTimer" to="." method="_on_quiz_timer_timeout"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]
