@@ -10,9 +10,9 @@ func _on_start_game_btn_pressed() -> void:
 # This signal comes from the QuizService when it gets the list of quizzes
 func _on_quiz_service_schedules_received(schedules: Array):
 	if schedules.size() > 0:
-		# 2. Pick the first active quiz and download its full content
-		var first_quiz_id = schedules[0].id
-		quiz_service.download_quiz(first_quiz_id)
+		# 2. Pick by quiz code
+		var quiz = Global.quiz_code
+		quiz_service.download_quiz(quiz)
 	else:
 		print("No active quizzes scheduled right now!")
 

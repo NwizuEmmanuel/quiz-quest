@@ -15,8 +15,8 @@ func _ready():
 
 # --- API FUNCTIONS ---
 
-func login_student(u: String, p: String):
-	var body = JSON.stringify({"username": u, "password": p})
+func login_student(u: String, p: String, c: String):
+	var body = JSON.stringify({"username": u, "password": p, "quiz_code": c})
 	request(BASE_URL + "/login", ["Content-Type: application/json"], HTTPClient.METHOD_POST, body)
 
 # --- API: DOWNLOAD FULL QUIZ DATA (Simplified) ---
@@ -24,25 +24,30 @@ func get_active_schedules():
 	var url = BASE_URL + "/get_schedules"
 	request(url, ["Content-Type: application/json"], HTTPClient.METHOD_GET)
 	
-func download_quiz(schedule_id: int):
+func download_quiz(quiz_code: String):
 	var url = BASE_URL + "/get_full_quiz"
 	# No passcode needed in the body anymore
 	var body = JSON.stringify({
-		"schedule_id": schedule_id
+		"quiz_code": quiz_code
 	})
 	
 	var headers = ["Content-Type: application/json"]
 	request(url, headers, HTTPClient.METHOD_POST, body)
 
-func submit_result(s_id: int, title: String, score: int, total: int,defeated_boss: String, history: Array):
+func submit_result(s_id: int, title: String, score: int, total: int,defeated_boss: String, history: Array, code: String,
+start_time: String, end_time: String):
 	var body = JSON.stringify({
 		"student_id": s_id, 
 		"quiz_title": title, 
 		"score": score, 
 		"total": total,
 		"defeated_boss": defeated_boss,
-		"quiz_details": history # This is the detailed breakdown
+		"quiz_details": history,
+		"quiz_code": code,
+		"start_time": start_time,
+		"end_time": end_time,
 		})
+	print(body)
 	request(BASE_URL + "/submit_results", ["Content-Type: application/json"], HTTPClient.METHOD_POST, body)
 
 # --- CALLBACK HANDLER ---

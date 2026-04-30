@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cchvw32j2jkhi"]
 
+[ext_resource type="Theme" uid="uid://dc6o4gyd3plt7" path="res://themes/ui_theme.theme" id="1_cs5o2"]
 [ext_resource type="Script" uid="uid://o3pdjq4unatq" path="res://scenes/login.gd" id="1_pymad"]
 [ext_resource type="Texture2D" uid="uid://pna52e6yhada" path="res://assets/backgrounds/alchemy room.png" id="2_nw41r"]
 [ext_resource type="Script" uid="uid://c3r0iuiptbd12" path="res://scenes/quiz_service.gd" id="3_0emk2"]
@@ -17,6 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_cs5o2")
 script = ExtResource("1_pymad")
 
 [node name="Panel" type="Panel" parent="." unique_id=170511801]
@@ -83,6 +85,17 @@ secret = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxLine_nw41r")
 text = "show password"
+
+[node name="Label" type="Label" parent="GridContainer" unique_id=817988993]
+layout_mode = 2
+text = "Quiz Code"
+
+[node name="QuizcodeLineEdit" type="LineEdit" parent="GridContainer" unique_id=340080997]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+alignment = 1
 
 [node name="Control" type="Control" parent="GridContainer" unique_id=561029476]
 layout_mode = 2
