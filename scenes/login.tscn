@@ -106,18 +106,18 @@ text = "Login"
 
 [node name="AcceptDialog" type="AcceptDialog" parent="." unique_id=949289496]
 
-[node name="ReturnBtn" type="Button" parent="." unique_id=934733642]
-layout_mode = 0
-offset_left = 85.0
-offset_top = 64.0
-offset_right = 139.0
-offset_bottom = 111.0
-text = "Return"
-
 [node name="QuizService" type="HTTPRequest" parent="." unique_id=1530631823]
 script = ExtResource("3_0emk2")
 
+[node name="ChangeServerIPBtn" type="Button" parent="." unique_id=891369228]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 43.0
+offset_right = 237.0
+offset_bottom = 80.0
+text = "change server IP"
+
 [connection signal="pressed" from="GridContainer/HBoxContainer/ShowPasswordBtn" to="." method="_on_show_password_btn_pressed"]
 [connection signal="pressed" from="GridContainer/LoginBtn" to="." method="_on_login_button_pressed"]
-[connection signal="pressed" from="ReturnBtn" to="." method="_on_return_btn_pressed"]
 [connection signal="login_completed" from="QuizService" to="." method="_on_quiz_service_login_completed"]
+[connection signal="pressed" from="ChangeServerIPBtn" to="." method="_on_change_server_ip_btn_pressed"]

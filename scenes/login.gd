@@ -24,9 +24,13 @@ func _on_quiz_service_login_completed(success, data):
 		Global.end_time = data.end_time
 		get_tree().change_scene_to_file("res://scenes/start_game.tscn")
 	else:
-		accept_dialog.dialog_text = "Invalid username, password or quiz code."
+		accept_dialog.dialog_text = "Invalid username, password or quiz code.\nOr check Server IP"
 		accept_dialog.popup_centered()
 
 
 func _on_show_password_btn_pressed() -> void:
 	pass_input.secret = !pass_input.secret
+
+
+func _on_change_server_ip_btn_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/ConnectToServer.tscn")

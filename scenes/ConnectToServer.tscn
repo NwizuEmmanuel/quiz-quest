@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://deom8uyivec1s"]
+
+[ext_resource type="Theme" uid="uid://dc6o4gyd3plt7" path="res://themes/ui_theme.theme" id="1_2cefw"]
+[ext_resource type="Script" uid="uid://cwcvrdnpkddd4" path="res://scenes/connect_to_server.gd" id="2_501ym"]
+[ext_resource type="Texture2D" uid="uid://voovg3n2mjsg" path="res://assets/images/classroom.png" id="2_c3a8p"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_501ym"]
+texture = ExtResource("2_c3a8p")
+modulate_color = Color(0.45995867, 0.45995867, 0.4599586, 1)
+
+[node name="ConnectToServer" type="Control" unique_id=1401356615]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2cefw")
+script = ExtResource("2_501ym")
+
+[node name="Panel" type="Panel" parent="." unique_id=1772951884]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_501ym")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1345534017]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -278.25
+offset_top = -46.5
+offset_right = 278.25
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1480972094]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="ServerIpLabel" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=342350126]
+layout_mode = 2
+text = "Server IP"
+
+[node name="ServerIpInput" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=425252854]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0.10980392, 0.05882353, 0.03137255, 0.5176471)
+text = "192.168.x.x"
+alignment = 1
+
+[node name="ConnectBtn" type="Button" parent="VBoxContainer" unique_id=1133711685]
+layout_mode = 2
+text = "connect"
+
+[connection signal="pressed" from="VBoxContainer/ConnectBtn" to="." method="_on_connect_btn_pressed"]

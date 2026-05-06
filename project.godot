@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="quiz-quest"
-run/main_scene="uid://cchvw32j2jkhi"
+run/main_scene="uid://deom8uyivec1s"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/image="uid://bud0db804qtga"
 

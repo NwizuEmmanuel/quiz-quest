@@ -8,7 +8,7 @@ signal result_submitted(success)
 signal request_finished(data)
 signal error_occurred(message)
 
-const BASE_URL = "http://127.0.0.1:7777/api"
+var BASE_URL = "http://%s:7777/api" % Global.server_ip
 
 func _ready():
 	self.request_completed.connect(_on_request_completed)
